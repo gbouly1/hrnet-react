@@ -22,16 +22,10 @@ export function EmployeeProvider({ children }) {
     setEmployees([...employees, employee]);
   };
 
-  // Fonction pour supprimer un employé (si besoin)
-  const deleteEmployee = (employeeId) => {
-    setEmployees(employees.filter((employee) => employee.id !== employeeId));
-  };
-
   // Regroupement des valeurs et fonctions à partager
   const value = {
     employees,
     addEmployee,
-    deleteEmployee,
   };
 
   // Retour du Provider avec les valeurs

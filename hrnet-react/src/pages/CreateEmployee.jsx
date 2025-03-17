@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Modal from "../components/Modal";
 import { useEmployees } from "../context/EmployeeContext";
 
 function CreateEmployee() {
@@ -39,6 +40,11 @@ function CreateEmployee() {
     "Legal",
   ];
 
+  const [lastEmployee, setLastEmployee] = useState({
+    firstName: "",
+    lastName: "",
+  });
+
   // Gestion de la soumission du formulaire
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,13 +65,16 @@ function CreateEmployee() {
       },
     };
 
+    // Stocker le nom et prénom de l'employé ajouté
+    setLastEmployee({ firstName, lastName });
+
     // Ajouter l'employé via le contexte
     addEmployee(employee);
 
-    // Afficher la modale de confirmation
+    // Afficher la modale de confirmation avec le nom et prénom
     setShowModal(true);
 
-    // Réinitialiser le formulaire
+    // Réinitialiser le formulaire après avoir affiché la modale
     resetForm();
   };
 
@@ -81,6 +90,11 @@ function CreateEmployee() {
     setZipCode("");
   };
 
+  // Fonction pour fermer la modale
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
@@ -93,7 +107,7 @@ function CreateEmployee() {
         </Link>
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
         <h2 className="text-xl font-semibold mb-6">Create Employee</h2>
 
         <form onSubmit={handleSubmit} className="max-w-lg">
@@ -223,28 +237,20 @@ function CreateEmployee() {
 
           <button
             type="submit"
-            className="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded font-medium"
+            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded font-medium w-full"
           >
             Save
           </button>
         </form>
       </div>
 
-      {/* Ici vous ajouterez votre composant Modal quand vous l'aurez créé */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md">
-            <h2 className="text-xl font-semibold mb-4">Success!</h2>
-            <p>Employee created successfully.</p>
-            <button
-              onClick={() => setShowModal(false)}
-              className="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+      {/* Utilisation du composant Modal avec le nom de l'employé */}
+      <Modal
+        isOpen={showModal}
+        onClose={closeModal}
+        title="Success!"
+        message={`Employee ${lastEmployee.firstName} ${lastEmployee.lastName} created successfully.`}
+      />
     </div>
   );
 }
