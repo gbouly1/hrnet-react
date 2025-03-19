@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "../components/Modal";
 import { useEmployees } from "../context/EmployeeContext";
+import states from "../states";
 
 function CreateEmployee() {
   // États pour le formulaire
@@ -20,16 +21,6 @@ function CreateEmployee() {
 
   // Accès au contexte pour ajouter un employé
   const { addEmployee } = useEmployees();
-
-  // Options pour le sélecteur d'état
-  const states = [
-    { value: "AL", name: "Alabama" },
-    { value: "AK", name: "Alaska" },
-    { value: "AZ", name: "Arizona" },
-    { value: "AR", name: "Arkansas" },
-    { value: "CA", name: "California" },
-    // Ajoutez les autres états américains ici
-  ];
 
   // Options pour le département
   const departments = [
@@ -116,8 +107,11 @@ function CreateEmployee() {
             <h3 className="font-medium mb-3">Personal Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block mb-1">First Name</label>
+                <label className="block mb-1" for="firstname">
+                  First Name
+                </label>
                 <input
+                  id="firstname"
                   type="text"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -127,8 +121,11 @@ function CreateEmployee() {
               </div>
 
               <div>
-                <label className="block mb-1">Last Name</label>
+                <label className="block mb-1" for="lastname">
+                  Last Name
+                </label>
                 <input
+                  id="lastname"
                   type="text"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
@@ -138,8 +135,11 @@ function CreateEmployee() {
               </div>
 
               <div>
-                <label className="block mb-1">Date of Birth</label>
+                <label className="block mb-1" for="birthdate">
+                  Date of Birth
+                </label>
                 <input
+                  id="birthdate"
                   type="date"
                   value={birthDate}
                   onChange={(e) => setBirthDate(e.target.value)}
@@ -149,8 +149,11 @@ function CreateEmployee() {
               </div>
 
               <div>
-                <label className="block mb-1">Start Date</label>
+                <label className="block mb-1" for="startdate">
+                  Start Date
+                </label>
                 <input
+                  id="startdate"
                   type="date"
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
@@ -166,8 +169,11 @@ function CreateEmployee() {
             <h3 className="font-medium mb-3">Address</h3>
             <div className="grid grid-cols-1 gap-4">
               <div>
-                <label className="block mb-1">Street</label>
+                <label className="block mb-1" for="address">
+                  Street
+                </label>
                 <input
+                  id="address"
                   type="text"
                   value={street}
                   onChange={(e) => setStreet(e.target.value)}
@@ -177,8 +183,11 @@ function CreateEmployee() {
               </div>
 
               <div>
-                <label className="block mb-1">City</label>
+                <label className="block mb-1" for="city">
+                  City
+                </label>
                 <input
+                  id="city"
                   type="text"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
@@ -188,8 +197,12 @@ function CreateEmployee() {
               </div>
 
               <div>
-                <label className="block mb-1">State</label>
+                <label className="block mb-1" for="state">
+                  State
+                </label>
                 <select
+                  id="state"
+                  aria-label="state"
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                   className="w-full p-2 border rounded"
@@ -205,8 +218,11 @@ function CreateEmployee() {
               </div>
 
               <div>
-                <label className="block mb-1">Zip Code</label>
+                <label className="block mb-1" for="zipcode">
+                  Zip Code
+                </label>
                 <input
+                  id="zipcode"
                   type="text"
                   value={zipCode}
                   onChange={(e) => setZipCode(e.target.value)}
@@ -219,8 +235,12 @@ function CreateEmployee() {
 
           {/* Département */}
           <div className="mb-6">
-            <label className="block mb-1">Department</label>
+            <label className="block mb-1" for="department">
+              Department
+            </label>
             <select
+              id="department"
+              aria-label="department"
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
               className="w-full p-2 border rounded"

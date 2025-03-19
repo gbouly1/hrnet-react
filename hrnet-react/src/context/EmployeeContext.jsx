@@ -1,21 +1,12 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 // Création du contexte
 const EmployeeContext = createContext();
 
 // Provider qui va envelopper votre application
 export function EmployeeProvider({ children }) {
-  // État local pour stocker les employés
-  const [employees, setEmployees] = useState(() => {
-    // Récupération des données depuis localStorage au chargement
-    const savedEmployees = localStorage.getItem("employees");
-    return savedEmployees ? JSON.parse(savedEmployees) : [];
-  });
-
-  // Sauvegarde dans localStorage à chaque modification de l'état
-  useEffect(() => {
-    localStorage.setItem("employees", JSON.stringify(employees));
-  }, [employees]);
+  // État local pour stocker les employés (sans localStorage)
+  const [employees, setEmployees] = useState([]);
 
   // Fonction pour ajouter un nouvel employé
   const addEmployee = (employee) => {
