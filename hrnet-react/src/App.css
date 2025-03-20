@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+p,
+h2 {
+  font-display: swap;
+}
